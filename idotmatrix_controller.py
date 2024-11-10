@@ -119,7 +119,7 @@ def switch_on(state):
 
 def string_to_bitmaps(input_string, font_path=None):
     if font_path is None:
-        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        font_path = "font.ttf"
     font_size = 24
     font = ImageFont.truetype(font_path, font_size)
     hex_strings = []
@@ -323,18 +323,18 @@ elif len(sys.argv) > 1 and sys.argv[1] == "--connect":
                         for descriptor in characteristic.descriptors():
                             print(f"\t\tDescriptor: {descriptor.uuid()}")
                 peripheral.notify(SERVICE_UUID, NOTIFICATION_UUID, response_decode)
-                print("Turning on")
-                switch_on(True)
-                time.sleep(1)
-                print("Syncing time")
-                sync_time()
+                # print("Turning on")
+                # switch_on(True)
+                # time.sleep(1)
+                # print("Syncing time")
+                # sync_time()
                 
-                #spiral = generate_spiral_coordinates()
-                #print(spiral)
-                # for each in spiral:
-                #     graffiti_paint((random.randint(0,255), random.randint(0,255), random.randint(0,255)), each[0], each[1])
-                # #    time.sleep(0.1)
-                # time.sleep(5)
+                spiral = generate_spiral_coordinates()
+                print(spiral)
+                for each in spiral:
+                    graffiti_paint((random.randint(0,255), random.randint(0,255), random.randint(0,255)), each[0], each[1])
+                    time.sleep(0.1)
+                time.sleep(5)
                 text_packet = build_string_packet(string_to_bitmaps("It's Christmas!"), text_mode=1, text_colour=(random.randint(0,255),random.randint(0,255),random.randint(0,255)), text_colour_mode=1)
                 write_packet(text_packet)
                 time.sleep(5)
